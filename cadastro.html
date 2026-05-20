@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro | SIGE-IFPA Eventos</title>
+    <style>
+        :root {
+            --primary: #0f8623;
+            --secondary: #b30000;
+            --accent: #f4f4f4;
+            --text: #333;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--accent);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 5px solid var(--secondary);
+        }
+        
+        header h1 {
+            font-size: 1.5rem;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+        
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        nav a:hover {
+            text-decoration: underline;
+        }
+        
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .cadastro-container {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .cadastro-container h2 {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .cadastro-container p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        .btn-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .btn-link:hover {
+            text-decoration: underline;
+        }
+        
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .terms input {
+            width: auto;
+            margin-top: 3px;
+        }
+        
+        .terms label {
+            font-weight: normal;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🎯 SIGE-IFPA Eventos</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="cadastro-container">
+            <h2>📝 Criar Conta</h2>
+            <p>Preencha os dados abaixo para se cadastrar na plataforma</p>
+            
+            <form action="login.html">
+                <div class="form-group">
+                    <label for="nome">Nome Completo *</label>
+                    <input type="text" id="nome" placeholder="Digite seu nome completo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail *</label>
+                    <input type="email" id="email" placeholder="seu@email.com" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="matricula">Matrícula *</label>
+                        <input type="text" id="matricula" placeholder="Ex: 2024001234" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefone">Telefone</label>
+                        <input type="tel" id="telefone" placeholder="(91) 99999-9999">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="curso">Curso *</label>
+                    <select id="curso" required>
+                        <option value="">Selecione seu curso</option>
+                        <option value="ads">Análise e Desenvolvimento de Sistemas</option>
+                        <option value="engenharia">Engenharia de Software</option>
+                        <option value="redes">Redes de Computadores</option>
+                        <option value="administracao">Administração</option>
+                        <option value="contabilidade">Contabilidade</option>
+                        <option value="outro">Outro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="campus">Campus *</label>
+                    <select id="campus" required>
+                        <option value="">Selecione seu campus</option>
+                        <option value="belem">Belém</option>
+                        <option value="castanhal">Castanhal</option>
+                        <option value="parauapebas">Parauapebas</option>
+                        <option value="santarem">Santarém</option>
+                        <option value="maraba">Marabá</option>
+                        <option value="outro">Outro</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="senha">Senha *</label>
+                        <input type="password" id="senha" placeholder="Mínimo 6 caracteres" minlength="6" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmar-senha">Confirmar Senha *</label>
+                        <input type="password" id="confirmar-senha" placeholder="Repita a senha" minlength="6" required>
+                    </div>
+                </div>
+
+                <div class="terms">
+                    <input type="checkbox" id="termos" required>
+                    <label for="termos">Concordo com os termos de uso e política de privacidade da plataforma SIGE-IFPA Eventos.</label>
+                </div>
+
+                <button type="submit" class="btn">Cadastrar</button>
+                
+                <a href="login.html" class="btn-link">Já tem conta? Faça login</a>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SIGE-IFPA Eventos</p>
+    </footer>
+</body>
+</html>

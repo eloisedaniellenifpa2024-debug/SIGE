@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre | SIGE-IFPA Eventos</title>
+    <style>
+        :root { --primary: #226b05; --secondary: #032903; --accent: #f4f4f4; --text: #333; --white: #ffffff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--accent); color: var(--text); display: flex; flex-direction: column; min-height: 100vh; }
+        header { background-color: var(--primary); color: var(--white); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 5px solid var(--secondary); }
+        header h1 { font-size: 1.5rem; }
+        nav ul { list-style: none; display: flex; gap: 20px; flex-wrap: wrap; }
+        nav a { color: var(--white); text-decoration: none; font-weight: bold; }
+        nav a:hover { text-decoration: underline; }
+        main { flex: 1; padding: 2rem; max-width: 1000px; margin: 0 auto; width: 100%; }
+        footer { background-color: #333; color: white; text-align: center; padding: 1rem; margin-top: auto; }
+        
+        .page-header { margin-bottom: 30px; text-align: center; }
+        .page-header h2 { color: var(--primary); margin-bottom: 10px; }
+        .page-header p { color: #666; }
+        
+        .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 30px; }
+        
+        .info-card { background: var(--white); padding: 30px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .info-card h3 { color: var(--primary); margin-bottom: 20px; border-bottom: 2px solid var(--secondary); padding-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .info-card h3 .icon { font-size: 1.5rem; }
+        
+        .info-item { margin-bottom: 20px; }
+        .info-item label { display: block; font-weight: bold; color: #666; margin-bottom: 5px; }
+        .info-item span { color: var(--text); display: block; line-height: 1.6; }
+        
+        .address-card { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; }
+        .address-card h3 { color: white; border-bottom-color: rgba(255,255,255,0.3); }
+        .address-card .info-item label { color: rgba(255,255,255,0.9); }
+        .address-card .info-item span { color: white; }
+        
+        .team-member { display: flex; align-items: center; gap: 20px; padding: 20px 0; border-bottom: 1px solid #eee; }
+        .team-member:last-child { border-bottom: none; }
+        .team-avatar { width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white; flex-shrink: 0; }
+        .team-info h4 { color: var(--primary); margin-bottom: 5px; }
+        .team-info p { color: #666; font-size: 0.9rem; margin-bottom: 3px; }
+        .team-info .role { color: var(--secondary); font-weight: bold; font-size: 0.85rem; }
+        
+        .platform-info { background: var(--white); padding: 30px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .platform-info h3 { color: var(--primary); margin-bottom: 20px; border-bottom: 2px solid var(--secondary); padding-bottom: 10px; }
+        .platform-info ul { list-style: none; }
+        .platform-info li { padding: 10px 0; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 10px; }
+        .platform-info li:last-child { border-bottom: none; }
+        .platform-info li .check { color: var(--success); font-weight: bold; }
+        
+        .btn { display: inline-block; padding: 12px 25px; background-color: var(--primary); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; text-decoration: none; margin-top: 20px; }
+        .btn:hover { background-color: var(--secondary); }
+        
+        @media (max-width: 768px) {
+            .team-member { flex-direction: column; text-align: center; }
+            .about-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Botão de Acessibilidade -->
+<script src="../acessibilidade.js"></script>
+<!-- OU, se estiver na raiz: -->
+<script src="acessibilidade.js"></script>
+    <header>
+        <h1>🎯 SIGE-IFPA Eventos</h1>
+        <nav>
+    <ul>
+        <li><a href="dashboard.html">Painel</a></li>
+        <li><a href="perfil.html">Meu Perfil</a></li>
+        <li><a href="sobre.html">Sobre</a></li>  <!-- ✅ NOVO LINK -->
+        <li><a href="../eventos/lista.html">Eventos</a></li>
+        <li><a href="../relatorios/participante.html">Relatórios</a></li>
+        <li><a href="../login.html">Sair</a></li>
+    </ul>
+</nav>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h2>ℹ️ Sobre a Plataforma</h2>
+            <p>Conheça mais sobre o SIGE-IFPA Eventos e nossa instituição</p>
+        </div>
+
+        <div class="about-grid">
+            <!-- Endereço Institucional -->
+            <div class="info-card address-card">
+                <h3><span class="icon">📍</span> Endereço Institucional</h3>
+                <div class="info-item">
+                    <label>Instituição</label>
+                    <span>Instituto Federal do Pará - IFPA</span>
+                </div>
+                <div class="info-item">
+                    <label>Campus</label>
+                    <span>Campus Cametá</span>
+                </div>
+                <div class="info-item">
+                    <label>Endereço</label>
+                    <span>
+                        Rua Euclides Filgueiredo<br>
+                        Bairro: Matinha<br>
+                        Cametá - PA<br>
+                    </span>
+                </div>
+                <div class="info-item">
+                    <label>Contato</label>
+                    <span>
+                        📞 (91) 3210-5000<br>
+                        📧 contato.cametá@ifpa.edu.br<br>
+                        🌐 www.ifpa.edu.br
+                    </span>
+                </div>
+            </div>
+
+            <!-- Equipe Responsável -->
+            <div class="info-card">
+                <h3><span class="icon">👥</span> Equipe Responsável</h3>
+                
+                <div class="team-member">
+                    <div class="team-avatar">👨‍💼</div>
+                    <div class="team-info">
+                        <h4>Dr. Jonatas Guimarães</h4>
+                        <p class="role">Diretor Geral do Campus Cametá</p>
+                        <p>JonatasGuimarães@ifpa.edu.br</p>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="team-avatar">👩‍💻</div>
+                    <div class="team-info">
+                        <h4>Prof. Diego Coelho</h4>
+                        <p class="role">Coordenador </p>
+                        <p>DiegoCoelho@ifpa.edu.br</p>
+                    </div>
+                </div>
+                
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Sobre a Plataforma -->
+        <div class="platform-info">
+            <h3>🎯 Sobre o SIGE-IFPA Eventos</h3>
+            <p style="margin-bottom: 20px; line-height: 1.8;">
+                O <strong>SIGE-IFPA Eventos</strong> é uma plataforma desenvolvida para facilitar a gestão, 
+                inscrição e certificação de eventos acadêmicos e culturais do Instituto Federal do Pará.
+            </p>
+            <ul>
+                <li><span class="check">✓</span> Inscrição simplificada em eventos</li>
+                <li><span class="check">✓</span> Registro de presença com QR Code</li>
+                <li><span class="check">✓</span> Emissão automática de certificados</li>
+                <li><span class="check">✓</span> Relatórios de participação para horas complementares</li>
+                <li><span class="check">✓</span> Gestão completa para organizadores de eventos</li>
+            </ul>
+            <a href="dashboard.html" class="btn">Voltar ao Painel</a>
+        </div>
+         <!-- Criadora do Site -->
+        <div class="info-card" style="margin-bottom: 30px;">
+            <h3><span class="icon">💻</span> Desenvolvimento da Plataforma</h3>
+            <div class="info-item">
+                <label>Criadora do Site</label>
+                <span><strong>Eloise Daniellen X. Valente</strong></span>
+            </div>
+            <div class="info-item">
+                <label>Formação</label>
+                <span>Tecnica em Informática - IFPA Campus Cametá</span>
+            </div>
+            <div class="info-item">
+                <label>Contato Profissional</label>
+                <span>
+                    📧 eloisedaniellen.ifpa2024@gmail.com<br>
+                </span>
+            </div>
+            <div class="info-item">
+                <label>Ano de Desenvolvimento</label>
+                <span>2026</span>
+            </div>
+            <div class="info-item">
+                <label>Tecnologias Utilizadas</label>
+                <span>HTML • CSS3 • JavaScript • Design Responsivo</span>
+            </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SIGE-IFPA Eventos - Instituto Federal do Pará - Campus Cametá</p>
+        <p style="font-size: 0.85rem; opacity: 0.8; margin-top: 5px;">
+            Desenvolvido por Eloise Daniellen | Rua Marambaia - Cametá/PA
+        </p>
+    </footer>
+</body>
+</html>

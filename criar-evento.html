@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Novo Evento | SIGE-IFPA Eventos</title>
+    <style>
+        :root {--primary: #226b05; --secondary: #032903; --accent: #f4f4f4; --text: #333; --white: #ffffff; --success: #28a745; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--accent); color: var(--text); display: flex; flex-direction: column; min-height: 100vh; }
+        header { background-color: var(--primary); color: var(--white); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 5px solid var(--secondary); }
+        header h1 { font-size: 1.5rem; }
+        nav ul { list-style: none; display: flex; gap: 20px; flex-wrap: wrap; }
+        nav a { color: var(--white); text-decoration: none; font-weight: bold; }
+        nav a:hover { text-decoration: underline; }
+        main { flex: 1; padding: 2rem; max-width: 900px; margin: 0 auto; width: 100%; }
+        footer { background-color: #333; color: white; text-align: center; padding: 1rem; margin-top: auto; }
+        
+        .page-header { margin-bottom: 30px; }
+        .page-header h2 { color: var(--primary); margin-bottom: 10px; }
+        .page-header p { color: #666; }
+        
+        .form-container { background: var(--white); padding: 40px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .form-section { margin-bottom: 30px; }
+        .form-section h3 { color: var(--primary); margin-bottom: 20px; border-bottom: 2px solid var(--secondary); padding-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .form-section h3 .icon { font-size: 1.2rem; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--primary); }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .form-group small { color: #666; font-size: 0.85rem; display: block; margin-top: 5px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        
+        .checkbox-group { display: flex; align-items: flex-start; gap: 10px; margin-top: 10px; }
+        .checkbox-group input { width: auto; margin-top: 3px; }
+        .checkbox-group label { font-weight: normal; color: #666; margin-bottom: 0; }
+        
+        .btn { display: inline-block; padding: 15px 30px; background-color: var(--primary); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; text-decoration: none; font-size: 1rem; }
+        .btn:hover { background-color: var(--secondary); }
+        .btn-success { background-color: var(--success); }
+        .btn-success:hover { background-color: #218838; }
+        .btn-secondary { background-color: #666; }
+        .btn-secondary:hover { background-color: #444; }
+        .btn-group { display: flex; gap: 15px; margin-top: 30px; }
+        
+        .required { color: var(--secondary); }
+        
+        @media (max-width: 768px) {
+            .form-row { grid-template-columns: 1fr; }
+            .btn-group { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Botão de Acessibilidade -->
+<script src="../acessibilidade.js"></script>
+<!-- OU, se estiver na raiz: -->
+<script src="acessibilidade.js"></script>
+    <header>
+        <h1>🎯 SIGE-IFPA Eventos</h1>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html">Painel</a></li>
+                <li><a href="meus-eventos.html">Meus Eventos</a></li>
+                <li><a href="criar-evento.html">Criar Evento</a></li>
+                <li><a href="perfil.html">Perfil</a></li>
+                <li><a href="../login.html">Sair</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h2>➕ Criar Novo Evento</h2>
+            <p>Preencha todas as informações para publicar seu evento</p>
+        </div>
+
+        <form class="form-container" id="eventForm" action="meus-eventos.html">
+            <div class="form-section">
+                <h3><span class="icon">📋</span> Informações Básicas</h3>
+                
+                <div class="form-group">
+                    <label for="titulo">Título do Evento <span class="required">*</span></label>
+                    <input type="text" id="titulo" placeholder="Ex: Workshop de Desenvolvimento Web" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="descricao">Descrição <span class="required">*</span></label>
+                    <textarea id="descricao" placeholder="Descreva o evento, objetivos, público-alvo, conteúdos que serão abordados..." required></textarea>
+                    <small>Informe detalhes importantes sobre o evento para os participantes.</small>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="tipo">Tipo de Evento <span class="required">*</span></label>
+                        <select id="tipo" required>
+                            <option value="">Selecione o tipo</option>
+                            <option value="workshop">Workshop</option>
+                            <option value="palestra">Palestra</option>
+                            <option value="curso">Curso</option>
+                            <option value="seminario">Seminário</option>
+                            <option value="minicurso">Minicurso</option>
+                            <option value="oficina">Oficina</option>
+                            <option value="congresso">Congresso</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="modalidade">Modalidade <span class="required">*</span></label>
+                        <select id="modalidade" required>
+                            <option value="">Selecione a modalidade</option>
+                            <option value="presencial">Presencial</option>
+                            <option value="online">Online</option>
+                            <option value="hibrido">Híbrido</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3><span class="icon">📅</span> Data e Local</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="data">Data do Evento <span class="required">*</span></label>
+                        <input type="date" id="data" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="hora">Horário de Início <span class="required">*</span></label>
+                        <input type="time" id="hora" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="hora-fim">Horário de Término <span class="required">*</span></label>
+                        <input type="time" id="hora-fim" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="carga">Carga Horária (horas) <span class="required">*</span></label>
+                        <input type="number" id="carga" placeholder="Ex: 8" min="1" step="0.5" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="vagas">Número de Vagas <span class="required">*</span></label>
+                        <input type="number" id="vagas" placeholder="Ex: 50" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inscricoes">Data Limite para Inscrições <span class="required">*</span></label>
+                        <input type="date" id="inscricoes" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="campus">Campus <span class="required">*</span></label>
+                    <select id="campus" required>
+                        <option value="">Selecione o campus</option>
+                        <option value="belem">Belém</option>
+                        <option value="castanhal">Castanhal</option>
+                        <option value="parauapebas">Parauapebas</option>
+                        <option value="santarem">Santarém</option>
+                        <option value="maraba">Marabá</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="local">Local Específico <span class="required">*</span></label>
+                    <input type="text" id="local" placeholder="Ex: Laboratório de Informática 3, Auditório Principal, Sala 205..." required>
+                    <small>Informe o local exato onde o evento será realizado.</small>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3><span class="icon">👨‍🏫</span> Instrutores/Palestrantes</h3>
+                
+                <div class="form-group">
+                    <label for="instrutor">Nome do Instrutor Principal <span class="required">*</span></label>
+                    <input type="text" id="instrutor" placeholder="Ex: Prof. Carlos Mendes" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="instrutor-titulo">Titulação/Cargo</label>
+                    <input type="text" id="instrutor-titulo" placeholder="Ex: Dr. em Ciência da Computação, Especialista em...">
+                </div>
+                
+                <div class="form-group">
+                    <label for="instrutor-bio">Breve Biografia</label>
+                    <textarea id="instrutor-bio" placeholder="Descreva a formação e experiência do instrutor..."></textarea>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3><span class="icon">⚙️</span> Configurações</h3>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="certificado" checked>
+                    <label for="certificado">Emitir certificado automaticamente após confirmação de presença</label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="lista-espera">
+                    <label for="lista-espera">Permitir lista de espera quando vagas esgotarem</label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="publico">
+                    <label for="publico">Evento aberto ao público externo (não apenas IFPA)</label>
+                </div>
+                
+                <div class="form-group" style="margin-top: 20px;">
+                    <label for="observacoes">Observações Adicionais</label>
+                    <textarea id="observacoes" placeholder="Informações adicionais para os participantes..."></textarea>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button type="submit" class="btn btn-success">📢 Publicar Evento</button>
+                <button type="button" class="btn btn-secondary" onclick="saveDraft()">💾 Salvar como Rascunho</button>
+                <a href="meus-eventos.html" class="btn btn-secondary" style="text-decoration: none; display: inline-block; text-align: center;">Cancelar</a>
+            </div>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SIGE-IFPA Eventos</p>
+    </footer>
+
+    <script>
+        document.getElementById('eventForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validação básica
+            const titulo = document.getElementById('titulo').value;
+            const data = document.getElementById('data').value;
+            const vagas = document.getElementById('vagas').value;
+            
+            if(!titulo || !data || !vagas) {
+                alert('Preencha todos os campos obrigatórios!');
+                return;
+            }
+            
+            // Simula publicação
+            const confirmacao = confirm('Deseja publicar este evento?\n\nTítulo: ' + titulo + '\nData: ' + data + '\nVagas: ' + vagas);
+            
+            if(confirmacao) {
+                alert('✅ Evento publicado com sucesso!\n\nOs participantes já podem se inscrever.');
+                window.location.href = 'meus-eventos.html';
+            }
+        });
+        
+        function saveDraft() {
+            alert('💾 Evento salvo como rascunho!\n\nVocê pode continuar editando depois.');
+            window.location.href = 'meus-eventos.html';
+        }
+    </script>
+</body>
+</html>

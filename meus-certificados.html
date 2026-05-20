@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Certificados | SIGE-IFPA Eventos</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>🎯 SIGE-IFPA Eventos</h1>
+        <nav>
+            <ul>
+                <li><a href="../dashboard.html">Painel</a></li>
+                <li><a href="../../eventos/lista.html">Eventos</a></li>
+                <li><a href="../../login.html">Sair</a></li>
+                <li><a href="sobre.html">Sobre</a></li>  <!-- ✅ NOVO LINK -->
+
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h2>📜 Meus Certificados</h2>
+            <p>Emita e baixe seus certificados de participação</p>
+        </div>
+
+        <div class="card" style="text-align: left;">
+            <h3 style="color: var(--primary); margin-bottom: 20px;">Certificados Disponíveis</h3>
+            
+            <div class="event-item">
+                <div class="event-info">
+                    <h4>Curso de Segurança da Informação</h4>
+                    <p>Participante: João da Silva | Matrícula: 2024001234</p>
+                    <p style="margin-top: 10px; color: #888; font-size: 0.85rem;">
+                        📅 25/03/2024 | ⏰ 8 horas | 📍 Campus Belém
+                    </p>
+                </div>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <span class="status status-success">Disponível</span>
+                    <button class="btn btn-success btn-small" onclick="openCertificate('Curso de Segurança da Informação', 'João da Silva', '2024001234', '25/03/2024', '8 horas', 'Campus Belém')">📄 Gerar</button>
+                </div>
+            </div>
+
+            <div class="event-item">
+                <div class="event-info">
+                    <h4>Seminário de Inovação Tecnológica</h4>
+                    <p>Participante: João da Silva | Matrícula: 2024001234</p>
+                    <p style="margin-top: 10px; color: #888; font-size: 0.85rem;">
+                        📅 10/02/2024 | ⏰ 4 horas | 📍 Campus Santarém
+                    </p>
+                </div>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <span class="status status-success">Disponível</span>
+                    <button class="btn btn-success btn-small" onclick="openCertificate('Seminário de Inovação Tecnológica', 'João da Silva', '2024001234', '10/02/2024', '4 horas', 'Campus Santarém')">📄 Gerar</button>
+                </div>
+            </div>
+
+            <div class="event-item">
+                <div class="event-info">
+                    <h4>Workshop de Desenvolvimento Web</h4>
+                    <p>Participante: João da Silva | Matrícula: 2024001234</p>
+                    <p style="margin-top: 10px; color: #888; font-size: 0.85rem;">
+                        📅 15/03/2024 | ⏰ 8 horas | 📍 Campus Belém
+                    </p>
+                </div>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <span class="status status-warning">Aguardando Presença</span>
+                    <button class="btn btn-secondary btn-small" disabled>Aguardar</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal do Certificado -->
+    <div class="modal" id="certificateModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 style="color: var(--primary);">📜 Certificado de Participação</h3>
+                <button class="close-btn" onclick="closeCertificate()">&times;</button>
+            </div>
+            
+            <div class="certificate-preview" id="certificateContent">
+                <div class="certificate-header">
+                    <div class="certificate-logo">🎓</div>
+                    <div class="certificate-title">CERTIFICADO</div>
+                    <div class="certificate-subtitle" style="font-size: 1.2rem; color: var(--secondary);">SIGE-IFPA Eventos</div>
+                </div>
+                
+                <div class="certificate-body">
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: #333;">Certificamos que</p>
+                    <div class="certificate-name" id="certName">João da Silva</div>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: #333;">participou do evento</p>
+                    <p style="font-weight: bold; font-size: 1.3rem; color: var(--primary);" id="certEvent">Curso de Segurança da Informação</p>
+                    <div style="margin: 30px 0; font-size: 1rem; color: #666;">
+                        <p><strong>Matrícula:</strong> <span id="certMatricula">2024001234</span></p>
+                        <p><strong>Data:</strong> <span id="certData">25/03/2024</span></p>
+                        <p><strong>Carga Horária:</strong> <span id="certCarga">8 horas</span></p>
+                        <p><strong>Local:</strong> <span id="certLocal">Campus Belém</span></p>
+                    </div>
+                </div>
+                
+                <div class="certificate-footer">
+                    <div class="signature">
+                        <div class="signature-line"></div>
+                        <div class="signature-name">Prof. Carlos Mendes</div>
+                        <div class="signature-role">Coordenador do Evento</div>
+                    </div>
+                    <div class="certificate-seal">
+                        <div>SIGE<br>IFPA<br>2024</div>
+                    </div>
+                    <div class="signature">
+                        <div class="signature-line"></div>
+                        <div class="signature-name">Direção Geral</div>
+                        <div class="signature-role">IFPA - Campus Belém</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px; font-size: 0.85rem; color: #888;">
+                    <p>Código de Verificação: <strong id="certCode">CERT-2024-001234</strong></p>
+                    <p>Este certificado pode ser verificado em: <strong>sige.ifpa.edu.br/validar</strong></p>
+                </div>
+            </div>
+            
+            <div class="actions-bar" style="margin-top: 30px;">
+                <div class="actions-bar-content" style="justify-content: center;">
+                    <button class="btn" onclick="printCertificate()">🖨️ Imprimir / Salvar PDF</button>
+                    <button class="btn btn-secondary" onclick="closeCertificate()">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 SIGE-IFPA Eventos</p>
+    </footer>
+
+    <script>
+        function openCertificate(evento, nome, matricula, data, carga, local) {
+            document.getElementById('certEvent').textContent = evento;
+            document.getElementById('certName').textContent = nome;
+            document.getElementById('certMatricula').textContent = matricula;
+            document.getElementById('certData').textContent = data;
+            document.getElementById('certCarga').textContent = carga;
+            document.getElementById('certLocal').textContent = local;
+            document.getElementById('certCode').textContent = 'CERT-2024-' + matricula;
+            
+            document.getElementById('certificateModal').classList.add('active');
+        }
+
+        function closeCertificate() {
+            document.getElementById('certificateModal').classList.remove('active');
+        }
+
+        function printCertificate() {
+            window.print();
+        }
+
+        document.getElementById('certificateModal').addEventListener('click', function(e) {
+            if(e.target === this) {
+                closeCertificate();
+            }
+        });
+    </script>
+</body>
+</html>

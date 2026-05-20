@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emitir Certificados | SIGE-IFPA Eventos</title>
+    <style>
+        :root { --primary: #226b05; --secondary: #032903;--accent: #f4f4f4; --text: #333; --white: #ffffff; --success: #28a745; --warning: #ffc107; --danger: #dc3545; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--accent); color: var(--text); display: flex; flex-direction: column; min-height: 100vh; }
+        header { background-color: var(--primary); color: var(--white); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 5px solid var(--secondary); }
+        header h1 { font-size: 1.5rem; }
+        nav ul { list-style: none; display: flex; gap: 20px; }
+        nav a { color: var(--white); text-decoration: none; font-weight: bold; }
+        main { flex: 1; padding: 2rem; max-width: 1200px; margin: 0 auto; width: 100%; }
+        footer { background-color: #333; color: white; text-align: center; padding: 1rem; margin-top: auto; }
+        .page-header { margin-bottom: 30px; }
+        .page-header h2 { color: var(--primary); margin-bottom: 10px; }
+        .form-container { background: var(--white); padding: 40px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); max-width: 500px; margin: 0 auto; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--primary); }
+        .form-group select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+        .card { background: var(--white); padding: 30px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-top: 30px; }
+        .btn { display: inline-block; padding: 12px 25px; background-color: var(--primary); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; text-decoration: none; }
+        .btn:hover { background-color: var(--secondary); }
+        .btn-success { background-color: var(--success); }
+        .btn-secondary { background-color: #666; }
+        .btn-small { padding: 8px 15px; font-size: 0.85rem; }
+        table { width: 100%; border-collapse: collapse; background: var(--white); margin-top: 20px; }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background-color: var(--primary); color: white; }
+        tr:hover { background: #f8f9fa; }
+        .status { padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; }
+        .status-success { background: var(--success); color: white; }
+        .status-warning { background: var(--warning); color: #333; }
+        .status-danger { background: var(--danger); color: white; }
+        .actions-bar { background: var(--white); padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-top: 20px; }
+        .actions-bar-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+
+        /* ===== ALTO CONTRASTE ===== */
+        .alto-contraste body { background:#000!important;color:#fff!important; }
+        .alto-contraste header, .alto-contraste nav, .alto-contraste footer { background:#000!important;border-color:#fff!important; }
+        .alto-contraste .form-container, .alto-contraste .card, .alto-contraste .actions-bar { background:#000!important;border:3px solid #fff!important;color:#fff!important; }
+        .alto-contraste h1, .alto-contraste h2, .alto-contraste h3 { color:#FF0!important; }
+        .alto-contraste p, .alto-contraste span, .alto-contraste label { color:#fff!important; }
+        .alto-contraste a { color:#0FF!important;text-decoration:underline!important; }
+        .alto-contraste .btn { background:#fff!important;color:#000!important;border:2px solid #fff!important; }
+        .alto-contraste .btn:hover { background:#FF0!important; }
+        .alto-contraste .btn-success { background:#0F0!important;color:#000!important; }
+        .alto-contraste .btn-secondary { background:#888!important; }
+        .alto-contraste input, .alto-contraste select { background:#000!important;color:#fff!important;border:2px solid #fff!important; }
+        .alto-contraste table { background:#000!important;border:3px solid #fff!important; }
+        .alto-contraste th { background:#fff!important;color:#000!important; }
+        .alto-contraste td { border-color:#fff!important;color:#fff!important; }
+        .alto-contraste *:focus { outline:3px solid #FF0!important; }
+        .alto-contraste .status { border:2px solid #fff!important; }
+        .alto-contraste .status-success { background:#0F0!important;color:#000!important; }
+        .alto-contraste .status-warning { background:#FF0!important;color:#000!important; }
+        .alto-contraste .status-danger { background:#F00!important;color:#fff!important; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🎯 SIGE-IFPA Eventos</h1>
+        <nav>
+            <ul>
+                <li><a href="../dashboard.html">Painel</a></li>
+                <li><a href="../meus-eventos.html">Meus Eventos</a></li>
+                <li><a href="../../login.html">Sair</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h2>📜 Emitir Certificados</h2>
+            <p>Selecione os participantes e gere certificados</p>
+        </div>
+
+        <div class="form-container">
+            <div class="form-group">
+                <label for="evento">Selecione o Evento *</label>
+                <select id="evento">
+                    <option value="">Selecione um evento</option>
+                    <option value="1">Workshop de Desenvolvimento Web - 15/03/2024</option>
+                    <option value="2">Curso de Segurança da Informação - 25/03/2024</option>
+                </select>
+            </div>
+            <button class="btn" onclick="loadParticipants()">Carregar Participantes</button>
+        </div>
+
+        <div class="card">
+            <h3 style="color: var(--primary); margin-bottom: 20px;">Participantes com Presença Confirmada</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 50px; text-align: center;"><input type="checkbox" id="selectAll" onclick="toggleAll()"></th>
+                        <th>Nome</th>
+                        <th>Matrícula</th>
+                        <th>Curso</th>
+                        <th>Presença</th>
+                        <th>Certificado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;"><input type="checkbox" class="participant-check"></td>
+                        <td>João da Silva</td>
+                        <td>2024001234</td>
+                        <td>Análise e Desenvolvimento de Sistemas</td>
+                        <td><span class="status status-success">Presente</span></td>
+                        <td><span class="status status-warning">Não Emitido</span></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;"><input type="checkbox" class="participant-check"></td>
+                        <td>Maria Souza</td>
+                        <td>2024001235</td>
+                        <td>Engenharia de Software</td>
+                        <td><span class="status status-success">Presente</span></td>
+                        <td><span class="status status-warning">Não Emitido</span></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;"><input type="checkbox" class="participant-check" disabled></td>
+                        <td>Ana Oliveira</td>
+                        <td>2024001237</td>
+                        <td>Análise e Desenvolvimento de Sistemas</td>
+                        <td><span class="status status-danger">Ausente</span></td>
+                        <td><span class="status status-danger">Não Elegível</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="actions-bar">
+                <div class="actions-bar-content">
+                    <div style="font-weight: bold; color: var(--primary);">
+                        <span id="selectedCount">0</span> participantes selecionados
+                    </div>
+                    <div style="display: flex; gap: 15px;">
+                        <button class="btn btn-secondary btn-small" onclick="deselectAll()">Limpar</button>
+                        <button class="btn btn-success" onclick="generateCertificates()">📜 Gerar Selecionados</button>
+                        <button class="btn" onclick="generateAll()">📜 Gerar Todos</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SIGE-IFPA Eventos</p>
+    </footer>
+
+    <!-- ===== BOTÃO ALTO CONTRASTE ===== -->
+    <button id="btn-alto-contraste" onclick="toggleContraste()" style="position:fixed;bottom:20px;right:20px;padding:15px 25px;background:#000;color:#fff;border:3px solid #fff;border-radius:50px;cursor:pointer;font-weight:bold;font-size:1rem;z-index:9999;box-shadow:0 4px 15px rgba(0,0,0,0.3);">👁️ Alto Contraste</button>
+
+    <script>
+        document.querySelectorAll('.participant-check').forEach(cb => cb.addEventListener('change', updateCount));
+        function updateCount() {
+            document.getElementById('selectedCount').textContent = document.querySelectorAll('.participant-check:checked').length;
+        }
+        function toggleAll() {
+            const checked = document.getElementById('selectAll').checked;
+            document.querySelectorAll('.participant-check').forEach(cb => { if(!cb.disabled) cb.checked = checked; });
+            updateCount();
+        }
+        function deselectAll() {
+            document.getElementById('selectAll').checked = false;
+            document.querySelectorAll('.participant-check').forEach(cb => cb.checked = false);
+            updateCount();
+        }
+        function loadParticipants() {
+            if(!document.getElementById('evento').value) { alert('Selecione um evento!'); return; }
+            alert('Carregando participantes...');
+        }
+        function generateCertificates() {
+            const count = document.querySelectorAll('.participant-check:checked').length;
+            if(count === 0) { alert('Selecione pelo menos um participante!'); return; }
+            alert(`Gerando ${count} certificado(s)...`);
+        }
+        function generateAll() { alert('Gerando certificados para todos os presentes...'); }
+
+        // ===== FUNÇÃO ALTO CONTRASTE =====
+        function toggleContraste() {
+            document.body.classList.toggle('alto-contraste');
+            const btn = document.getElementById('btn-alto-contraste');
+            
+            if(document.body.classList.contains('alto-contraste')) {
+                btn.innerHTML = '👁️ Contraste Normal';
+                btn.style.background = '#fff';
+                btn.style.color = '#000';
+                btn.style.borderColor = '#000';
+                localStorage.setItem('altoContraste', 'ativo');
+            } else {
+                btn.innerHTML = '👁️ Alto Contraste';
+                btn.style.background = '#000';
+                btn.style.color = '#fff';
+                btn.style.borderColor = '#fff';
+                localStorage.setItem('altoContraste', 'inativo');
+            }
+        }
+
+        // Carregar preferência salva ao abrir a página
+        window.addEventListener('DOMContentLoaded', function() {
+            if(localStorage.getItem('altoContraste') === 'ativo') {
+                document.body.classList.add('alto-contraste');
+                const btn = document.getElementById('btn-alto-contraste');
+                btn.innerHTML = '👁️ Contraste Normal';
+                btn.style.background = '#fff';
+                btn.style.color = '#000';
+                btn.style.borderColor = '#000';
+            }
+        });
+    </script>
+</body>
+</html>

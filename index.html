@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos | IFPA - Instituto Federal do Pará</title>
+    <style>
+        :root {
+             --ifpa-blue: #157b26;
+            --ifpa-red: #22311b;
+            --ifpa-light: #f4f4f4;
+            --ifpa-white: #ffffff;
+            --ifpa-gray: #666666;
+            --ifpa-dark: #333333;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --shadow-hover: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--ifpa-light);
+            color: var(--ifpa-dark);
+            line-height: 1.6;
+        }
+        
+        .top-bar {
+            background: var(--ifpa-blue);
+            color: white;
+            padding: 8px 0;
+            font-size: 0.85rem;
+        }
+        
+        .top-bar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .top-bar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+        
+        .top-bar a:hover { text-decoration: underline; }
+        
+        header {
+            background: var(--ifpa-white);
+            border-bottom: 4px solid var(--ifpa-red);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 200px;
+        }
+        
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--ifpa-blue), var(--ifpa-red));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .logo-text h1 {
+            font-size: 3rem;
+            color: var(--ifpa-blue);
+            line-height: 0.;
+        }
+        
+        .logo-text p {
+            font-size: 0.85rem;
+            color: var(--ifpa-gray);
+        }
+        
+        nav {
+            background: var(--ifpa-blue);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 5px;
+        }
+        
+        .nav-menu li a {
+            display: block;
+            padding: 15px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            background: var(--ifpa-red);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--ifpa-blue) 0%, var(--ifpa-red) 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.95;
+        }
+        
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .search-box button {
+            padding: 15px 30px;
+            background: var(--ifpa-red);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .search-box button:hover { background: #900000; }
+        
+        .filters {
+            background: var(--ifpa-white);
+            padding: 20px;
+            margin: 30px auto;
+            max-width: 1200px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .filters select,
+        .filters input {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+        
+        .filters button {
+            padding: 10px 25px;
+            background: var(--ifpa-blue);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .filters button:hover { background: var(--ifpa-red); }
+        
+        .events-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--ifpa-red);
+        }
+        
+        .section-header h3 {
+            color: var(--ifpa-blue);
+            font-size: 1.8rem;
+        }
+        
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .event-card {
+            background: var(--ifpa-white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .event-image {
+            height: 180px;
+            background: linear-gradient(135deg, var(--ifpa-blue), var(--ifpa-red));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+        
+        .event-content {
+            padding: 25px;
+        }
+        
+        .event-tag {
+            display: inline-block;
+            padding: 5px 12px;
+            background: var(--ifpa-blue);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .event-tag.palestra { background: #007bff; }
+        .event-tag.curso { background: #28a745; }
+        .event-tag.workshop { background: #6f42c1; }
+        .event-tag.seminario { background: #fd7e14; }
+        
+        .event-content h4 {
+            color: var(--ifpa-blue);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        
+        .event-content p {
+            color: var(--ifpa-gray);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            display: -webkit-box;
+
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .event-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: var(--ifpa-gray);
+        }
+        
+        .event-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .event-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--ifpa-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+            flex: 1;
+        }
+        
+        .btn:hover { background: var(--ifpa-red); }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--ifpa-blue);
+            color: var(--ifpa-blue);
+        }
+        
+        .btn-outline:hover {
+            background: var(--ifpa-blue);
+            color: white;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 40px 0;
+        }
+        
+        .pagination button {
+            padding: 10px 15px;
+            background: var(--ifpa-white);
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .pagination button:hover,
+        .pagination button.active {
+            background: var(--ifpa-blue);
+            color: white;
+            border-color: var(--ifpa-blue);
+        }
+        
+        .cta-section {
+            background: var(--ifpa-blue);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            margin: 50px 0;
+        }
+        
+        .cta-section h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .cta-section p {
+            max-width: 600px;
+            margin: 0 auto 25px;
+            opacity: 0.95;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .cta-buttons .btn {
+            background: white;
+            color: var(--ifpa-blue);
+            padding: 15px 35px;
+            font-size: 1.1rem;
+        }
+        
+        .cta-buttons .btn:hover {
+            background: var(--ifpa-red);
+            color: white;
+        }
+        
+        .cta-buttons .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .cta-buttons .btn-outline:hover {
+            background: white;
+            color: var(--ifpa-blue);
+        }
+        
+        footer {
+            background: var(--ifpa-dark);
+            color: white;
+            padding: 50px 20px 20px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-section h4 {
+            color: white;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--ifpa-red);
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #444;
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .top-bar-container {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h2 { font-size: 2rem; }
+            .hero p { font-size: 1rem; }
+            
+            .search-box {
+                flex-direction: column;
+            }
+            
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .event-actions {
+                flex-direction: column;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA SUPERIOR -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <span>🎓 Instituto Federal do Pará</span>
+            <div>
+                <a href="#">Portal do Servidor</a>
+                <a href="#">Portal do Aluno</a>
+                <a href="login.html">Área Restrita</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+
+                <div class="logo-text">
+                    <h1>SIGE-IFPA</h1>
+                    <P>Sistema Integrado de Gestão de Eventos</P>
+                </div>
+            </div>
+            <div>
+                <a href="login.html" class="btn" style="background: var(--ifpa-red);">🔐 Acessar Sistema</a>
+            </div>
+        </div>
+    </header>
+    <!-- <div class="nav-container">
+            <ul class="nav-menu">
+                <li><a href="#" class="active">Eventos</a></li>
+                <li><a href="#">Institucional</a></li>
+                <li><a href="#">Cursos</a></li>
+                <li><a href="#">Pesquisa</a></li>
+                <li><a href="#">Extensão</a></li>
+                <li><a href="#">Campi</a></li>
+                <li><a href="#">Contato</a></li>
+            </ul>
+        </div> -->
+    <nav>
+        
+    </nav>
+
+    <!-- HERO / BANNER -->
+    <section class="hero">
+        <img src="https://images.even3.com/lpR9IaqmlmZaellzfa3zulJjIh8=/1100x440/smart/https://static.even3.com/banner/2.XSEMANAACADMICA.JEAN.6bcb923405354b26a651.png" alt="">
+        <p>Confira a programação de eventos acadêmicos, culturais e científicos abertos à comunidade.</p>
+        
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Buscar evento por nome, tema ou campus...">
+            <button onclick="filtrarEventos()">🔍 Buscar</button>
+        </div>
+    </section>
+
+    <!-- FILTROS -->
+    <div class="filters">
+        <select id="filtroTipo">
+            <option value="">Todos os Tipos</option>
+            <option value="palestra">Palestra</option>
+            <option value="curso">Curso</option>
+            <option value="workshop">Workshop</option>
+            <option value="seminario">Seminário</option>
+            <option value="congresso">Congresso</option>
+        </select>
+        
+        <select id="filtroCampus">
+            <option value="">Todos os Campus</option>
+            <option value="belem">Belém</option>
+            <option value="castanhal">Castanhal</option>
+            <option value="parauapebas">Parauapebas</option>
+            <option value="santarem">Santarém</option>
+            <option value="maraba">Marabá</option>
+            <option value="abaitetuba">Abaetetuba</option>
+        </select>
+        
+        <select id="filtroData">
+            <option value="">Todas as Datas</option>
+            <option value="hoje">Hoje</option>
+            <option value="semana">Esta Semana</option>
+            <option value="mes">Este Mês</option>
+            <option value="futuro">Próximos</option>
+        </select>
+        
+        <button onclick="filtrarEventos()">🔄 Aplicar Filtros</button>
+        <button onclick="limparFiltros()" class="btn-outline" style="background: transparent; border: 1px solid #ccc; color: #666;">Limpar</button>
+    </div>
+
+    <!-- LISTA DE EVENTOS -->
+    <section class="events-section">
+        <div class="section-header">
+            <h3>🎯 Eventos Disponíveis</h3>
+            <span id="eventosCount">12 eventos encontrados</span>
+        </div>
+        
+        <div class="events-grid" id="eventsGrid">
+            <!-- Evento 1 -->
+            <article class="event-card" data-tipo="workshop" data-campus="belem" data-data="2024-03-15">
+                <div class="event-image">💻</div>
+                <div class="event-content">
+                    <span class="event-tag workshop">Workshop</span>
+                    <h4>Workshop de Desenvolvimento Web com HTML, CSS e JavaScript</h4>
+                    <p>Aprenda na prática a criar sites responsivos e modernos utilizando as tecnologias fundamentais do desenvolvimento web front-end.</p>
+                    <div class="event-meta">
+                        <span>📍 Campus Belém</span>
+                        <span>📅 15/03/2024</span>
+                        <span>⏰ 08:00 - 17:00</span>
+                    </div>
+                    <div class="event-actions">
+                        <a href="eventos/detalhes.html?id=1" class="btn">Ver Detalhes</a>
+                        <a href="cadastro.html" class="btn btn-outline">Inscrever-se</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Evento 2 -->
+            <article class="event-card" data-tipo="palestra" data-campus="castanhal" data-data="2024-03-20">
+                <div class="event-image">🎤</div>
+                <div class="event-content">
+                    <span class="event-tag palestra">Palestra</span>
+                    <h4>Palestra: Carreira em Tecnologia da Informação</h4>
+                    <p>Descubra as oportunidades do mercado de TI, caminhos para especialização e dicas de profissionais experientes da área.</p>
+                    <div class="event-meta">
+                        <span>📍 Campus Castanhal</span>
+                        <span>📅 20/03/2024</span>
+                        <span>⏰ 14:00 - 17:00</span>
+                    </div>
+                    <div class="event-actions">
+                        <a href="eventos/detalhes.html?id=2" class="btn">Ver Detalhes</a>
+                        <a href="cadastro.html" class="btn btn-outline">Inscrever-se</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Evento 3 -->
+            <article class="event-card" data-tipo="curso" data-campus="belem" data-data="2024-03-25">
+                <div class="event-image">🔒</div>
+                <div class="event-content">
+                    <span class="event-tag curso">Curso</span>
+                    <h4>Curso de Segurança da Informação e Proteção de Dados</h4>
+                    <p>Capacitação em segurança digital, LGPD e boas práticas para proteção de dados pessoais e institucionais.</p>
+                    <div class="event-meta">
+                        <span>📍 Campus Belém</span>
+                        <span>📅 25/03/2024</span>
+                        <span>⏰ 09:00 - 18:00</span>
+                    </div>
+                    <div class="event-actions">
+                        <a href="eventos/detalhes.html?id=3" class="btn">Ver Detalhes</a>
+                        <a href="cadastro.html" class="btn btn-outline">Inscrever-se</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Evento 4 -->
+            <article class="event-card" data-tipo="seminario" data-campus="santarem" data-data="2024-03-30">
+                <div class="event-image">🤖</div>
+                <div class="event-content">
+                    <span class="event-tag seminario">Seminário</span>
+                    <h4>Seminário de Inteligência Artificial na Educação</h4>
+                    <p>Discussão sobre aplicações de IA no ensino, impactos na aprendizagem e perspectivas para o futuro da educação.</p>
+                    <div class="event-meta">
+                        <span>📍 Campus Santarém</span>
+                        <span>📅 30/03/2024</span>
+                        <span>⏰ 10:00 - 16:00</span>
+                    </div>
+                    <div class="event-actions">
+                        <a href="eventos/detalhes.html?id=4" class="btn">Ver Detalhes</a>
+                        <a href="cadastro.html" class="btn btn-outline">Inscrever-se</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Evento 5 -->
+            <article class="event-card" data-tipo="workshop" data-campus="maraba" data-data="2024-04-05">
+                <div class="event-image">📱</div>
+                <div class="event-content">
+                    <span class="event-tag workshop">Workshop</span>
+                    <h4>Workshop de Desenvolvimento de Apps Mobile</h4>
+                    <p>Introdução ao desenvolvimento de aplicativos para Android e iOS utilizando tecnologias modernas e acessíveis.</p>
+                    <div class="event-meta">
+                        <span>📍 Campus Marabá</span>
+                        <span>📅 05/04/2024</span>
+                        <span>⏰ 08:00 - 17:00</span>
+                    </div>
+                    <div class="event-actions">
+                        <a href="eventos/detalhes.html?id=5" class="btn">Ver Detalhes</a>
+                        <a href="cadastro.html" class="btn btn-outline">Inscrever-se</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Evento 6 -->
+            <article class="event-card" data-tipo="palestra" data-campus="belem" data-data="2024-04-10">
+                <div class="event-image">🌱</div>
+                <div class="event-content">
+                    <span class="event-tag palestra">Palestra</span>
+                    <h4>Palestra: Sustentabilidade e Tecnologia Verde</h4>
+                    <p>Como a tecnologia pode contribuir para um futuro mais sustentável e práticas de TI verde no ambiente corporativo.</p>
+                    <div class="event-meta">
+                        <span>📍 Campus Belém</span>
+                        <span>📅 10/04/2024</span>
+                        <span>⏰ 15:00 - 18:00</span>
+                    </div>
+                    <div class="event-actions">
+                        <a href="eventos/detalhes.html?id=6" class="btn">Ver Detalhes</a>
+                        <a href="cadastro.html" class="btn btn-outline">Inscrever-se</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- PAGINAÇÃO
+        <div class="pagination">
+            <button>« Anterior</button>
+            <button class="active">1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>Próxima »</button>
+        </div>
+    </section>  -->
+
+    <!-- CALL TO ACTION -->
+    <section class="cta-section">
+        <h3>🎓 Quer organizar um evento no IFPA?</h3>
+        <p>Servidores e colaboradores podem cadastrar eventos acadêmicos, culturais e científicos através do sistema SIGE-IFPA.</p>
+        <div class="cta-buttons">
+            <a href="cadastro.html" class="btn btn-outline"> Criar Conta</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>🏛️ IFPA</h4>
+                <p>Instituto Federal de Educação, Ciência e Tecnologia do Pará</p>
+                <p>📍 Rua Euclides filgueiredo </p>
+                <p>Marambai  Cametá - PA</p>
+                <p>CEP: 66.055-090</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>🔗 Links Úteis</h4>
+                <a href="#">Portal Institucional</a>
+                <a href="#">SUAP - Sistema Acadêmico</a>
+                <a href="#">Biblioteca Virtual</a>
+                <a href="#">Editais e Concursos</a>
+                <a href="#">Transparência</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>📞 Contato</h4>
+                <p>📧 contato@ifpa.edu.br</p>
+                <p>📞 (91) 3210-5000</p>
+                <p>🕐 Seg-Sex: 8h às 17h</p>
+                <a href="#">Fale Conosco</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>📱 Redes Sociais</h4>
+                <a href="#">📘 Facebook</a>
+                <a href="#">📸 Instagram</a>
+                <a href="#">🐦 Twitter/X</a>
+                <a href="#">▶️ YouTube</a>
+                <a href="#">💼 LinkedIn</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Instituto Federal do Pará - Todos os direitos reservados.</p>
+            <p style="margin-top: 10px; font-size: 0.85rem;">
+                SIGE-IFPA Eventos v1.0 | Desenvolvido por Eloise Daniellen X. Valente
+            </p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT PARA FILTROS E BUSCA -->
+    <script>
+        function filtrarEventos() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const tipo = document.getElementById('filtroTipo').value;
+            const campus = document.getElementById('filtroCampus').value;
+            const data = document.getElementById('filtroData').value;
+            
+            const cards = document.querySelectorAll('.event-card');
+            let visibleCount = 0;
+            
+            cards.forEach(card => {
+                const cardTipo = card.getAttribute('data-tipo');
+                const cardCampus = card.getAttribute('data-campus');
+                const cardData = card.getAttribute('data-data');
+                const cardTitle = card.querySelector('h4').textContent.toLowerCase();
+                const cardDesc = card.querySelector('p').textContent.toLowerCase();
+                
+                const searchMatch = search === '' || cardTitle.includes(search) || cardDesc.includes(search);
+                const tipoMatch = tipo === '' || cardTipo === tipo;
+                const campusMatch = campus === '' || cardCampus === campus;
+                
+                let dataMatch = true;
+                if(data === 'hoje') {
+                    const hoje = new Date().toISOString().split('T')[0];
+                    dataMatch = cardData === hoje;
+                }
+                
+                if(searchMatch && tipoMatch && campusMatch && dataMatch) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            document.getElementById('eventosCount').textContent = 
+                `${visibleCount} evento${visibleCount !== 1 ? 's' : ''} encontrado${visibleCount !== 1 ? 's' : ''}`;
+            
+            if(visibleCount === 0) {
+                alert('⚠️ Nenhum evento encontrado com os filtros selecionados.');
+            }
+        }
+        
+        function limparFiltros() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('filtroTipo').value = '';
+            document.getElementById('filtroCampus').value = '';
+            document.getElementById('filtroData').value = '';
+            filtrarEventos();
+        }
+        
+        document.getElementById('searchInput').addEventListener('keyup', function(e) {
+            if(e.key === 'Enter') {
+                filtrarEventos();
+            }
+        });
+        
+        document.querySelectorAll('.event-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.borderColor = 'var(--ifpa-red)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.borderColor = 'transparent';
+            });
+        });
+    </script>
+</body>
+</html>

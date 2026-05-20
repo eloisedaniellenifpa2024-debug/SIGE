@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop de Desenvolvimento Web | Eventos IFPA</title>
+    <style>
+        /* ===== RESET E VARIÁVEIS ===== */
+        :root {
+            --ifpa-blue: #0c6d1c;
+            --ifpa-red: #133503;
+            --ifpa-light: #f4f4f4;
+            --ifpa-white: #ffffff;
+            --ifpa-gray: #666666;
+            --ifpa-dark: #333333;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --shadow-hover: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--ifpa-light);
+            color: var(--ifpa-dark);
+            line-height: 1.6;
+        }
+        
+        /* ===== BARRA SUPERIOR IFPA ===== */
+        .top-bar {
+            background: var(--ifpa-blue);
+            color: white;
+            padding: 8px 0;
+            font-size: 0.85rem;
+        }
+        
+        .top-bar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .top-bar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+        
+        .top-bar a:hover { text-decoration: underline; }
+        
+        /* ===== HEADER PRINCIPAL ===== */
+        header {
+            background: var(--ifpa-white);
+            border-bottom: 4px solid var(--ifpa-red);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--ifpa-blue), var(--ifpa-red));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.3rem;
+            color: var(--ifpa-blue);
+            line-height: 1.2;
+        }
+        
+        .logo-text p {
+            font-size: 0.85rem;
+            color: var(--ifpa-gray);
+        }
+        
+        /* ===== NAVEGAÇÃO ===== */
+        nav {
+            background: var(--ifpa-blue);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 5px;
+        }
+        
+        .nav-menu li a {
+            display: block;
+            padding: 15px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            background: var(--ifpa-red);
+        }
+        
+        /* ===== BREADCRUMB ===== */
+        .breadcrumb {
+            background: var(--ifpa-white);
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .breadcrumb-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .breadcrumb a {
+            color: var(--ifpa-blue);
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { color: var(--ifpa-gray); }
+        
+        /* ===== CONTEÚDO PRINCIPAL ===== */
+        .event-detail {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+        
+        /* ===== CARD PRINCIPAL DO EVENTO ===== */
+        .event-main {
+            background: var(--ifpa-white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .event-banner {
+            height: 250px;
+            background: linear-gradient(135deg, var(--ifpa-blue), var(--ifpa-red));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+        }
+        
+        .event-header {
+            padding: 30px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .event-tag {
+            display: inline-block;
+            padding: 5px 15px;
+            background: var(--ifpa-blue);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .event-tag.palestra { background: #007bff; }
+        .event-tag.curso { background: #28a745; }
+        .event-tag.workshop { background: #6f42c1; }
+        .event-tag.seminario { background: #fd7e14; }
+        
+        .event-header h1 {
+            color: var(--ifpa-blue);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .event-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+            color: var(--ifpa-gray);
+        }
+        
+        .event-meta span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .event-stats {
+            display: flex;
+            gap: 30px;
+            padding: 15px 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-item .number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--ifpa-blue);
+        }
+        
+        .stat-item .label {
+            font-size: 0.85rem;
+            color: var(--ifpa-gray);
+        }
+        
+        .event-body {
+            padding: 30px;
+        }
+        
+        .event-body h3 {
+            color: var(--ifpa-blue);
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--ifpa-red);
+        }
+        
+        .event-body p {
+            margin-bottom: 15px;
+            color: var(--ifpa-dark);
+            line-height: 1.8;
+        }
+        
+        .event-body ul {
+            margin: 15px 0 15px 30px;
+            color: var(--ifpa-dark);
+        }
+        
+        .event-body li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        /* ===== AGENDA/PROGRAMAÇÃO ===== */
+        .schedule-item {
+            display: flex;
+            gap: 20px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .schedule-item:last-child { border-bottom: none; }
+        
+        .schedule-time {
+            min-width: 120px;
+            font-weight: bold;
+            color: var(--ifpa-blue);
+        }
+        
+        .schedule-content h4 {
+            color: var(--ifpa-dark);
+            margin-bottom: 5px;
+        }
+        
+        .schedule-content p {
+            color: var(--ifpa-gray);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        /* ===== INSTRUTOR ===== */
+        .instructor-card {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .instructor-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--ifpa-blue), var(--ifpa-red));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .instructor-info h4 {
+            color: var(--ifpa-blue);
+            margin-bottom: 5px;
+        }
+        
+        .instructor-info .role {
+            color: var(--ifpa-red);
+            font-weight: 500;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .instructor-info p {
+            color: var(--ifpa-gray);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        /* ===== SIDEBAR ===== */
+        .event-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .sidebar-card {
+            background: var(--ifpa-white);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+        }
+        
+        .sidebar-card h3 {
+            color: var(--ifpa-blue);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--ifpa-red);
+        }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .info-row:last-child { border-bottom: none; }
+        
+        .info-row .label {
+            color: var(--ifpa-gray);
+            font-size: 0.9rem;
+        }
+        
+        .info-row .value {
+            font-weight: 500;
+            color: var(--ifpa-dark);
+            text-align: right;
+        }
+        
+        /* ===== BOTÕES DE AÇÃO ===== */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 25px;
+            background: var(--ifpa-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+        }
+        
+        .btn:hover { background: var(--ifpa-red); }
+        
+        .btn-success {
+            background: var(--ifpa-red);
+        }
+        
+        .btn-success:hover {
+            background: #900000;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--ifpa-blue);
+            color: var(--ifpa-blue);
+        }
+        
+        .btn-outline:hover {
+            background: var(--ifpa-blue);
+            color: white;
+        }
+        
+        .btn-disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .btn-disabled:hover {
+            background: #ccc;
+        }
+        
+        /* ===== COMPARTILHAR ===== */
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .share-btn {
+            flex: 1;
+            padding: 10px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 0.85rem;
+            transition: background 0.3s;
+        }
+        
+        .share-btn:hover { background: var(--ifpa-blue); color: white; }
+        
+        /* ===== EVENTOS RELACIONADOS ===== */
+        .related-events {
+            margin-top: 30px;
+        }
+        
+        .related-card {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
+        }
+        
+        .related-card:hover {
+            border-color: var(--ifpa-red);
+        }
+        
+        .related-card .icon {
+            font-size: 2rem;
+            min-width: 50px;
+            text-align: center;
+        }
+        
+        .related-card h4 {
+            color: var(--ifpa-blue);
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .related-card p {
+            font-size: 0.85rem;
+            color: var(--ifpa-gray);
+            margin: 0;
+        }
+        
+        .related-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--ifpa-dark);
+            color: white;
+            padding: 50px 20px 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-section h4 {
+            color: white;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--ifpa-red);
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #444;
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        /* ===== RESPONSIVO ===== */
+        @media (max-width: 900px) {
+            .event-detail {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .top-bar-container {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .event-banner { height: 180px; font-size: 3rem; }
+            .event-header h1 { font-size: 1.5rem; }
+            .event-stats { flex-wrap: wrap; }
+            .instructor-card { flex-direction: column; text-align: center; }
+            .share-buttons { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+<!-- Botão de Acessibilidade -->
+<script src="../acessibilidade.js"></script>
+<!-- OU, se estiver na raiz: -->
+<script src="acessibilidade.js"></script>
+
+    <!-- BARRA SUPERIOR -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <span>🎓 Instituto Federal do Pará</span>
+            <div>
+                <a href="#">Portal do Servidor</a>
+                <a href="#">Portal do Aluno</a>
+                <a href="../login.html">Área Restrita</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">IFPA</div>
+                <div class="logo-text">
+                    <h1>Instituto Federal do Pará</h1>
+                    <p>Educação, Ciência e Tecnologia</p>
+                </div>
+            </div>
+            <div>
+                <a href="../login.html" class="btn" style="background: var(--ifpa-red); padding: 10px 20px; font-size: 0.9rem;">🔐 Acessar</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVEGAÇÃO -->
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-menu">
+                <li><a href="../index.html">Eventos</a></li>
+                <li><a href="#">Institucional</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+        <div class="breadcrumb-container">
+            <a href="../index.html">Início</a> > 
+            <a href="../index.html">Eventos</a> > 
+            <span>Workshop de Desenvolvimento Web</span>
+        </div>
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="event-detail">
+        
+        <!-- COLUNA PRINCIPAL -->
+        <div class="event-main">
+            <!-- Banner -->
+            <div class="event-banner">💻</div>
+            
+            <!-- Cabeçalho do Evento -->
+            <div class="event-header">
+                <span class="event-tag workshop">Workshop</span>
+                <h1>Workshop de Desenvolvimento Web com HTML, CSS e JavaScript</h1>
+                <div class="event-meta">
+                    <span>📍 Campus Belém</span>
+                    <span>📅 15 de março de 2024</span>
+                    <span>⏰ 08:00 - 17:00</span>
+                    <span>⏱️ 8 horas</span>
+                </div>
+            </div>
+            
+            <!-- Estatísticas -->
+            <div class="event-stats">
+                <div class="stat-item">
+                    <div class="number">35/50</div>
+                    <div class="label">Vagas</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">Gratuito</div>
+                    <div class="label">Investimento</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">Certificado</div>
+                    <div class="label">Incluso</div>
+                </div>
+            </div>
+            
+            <!-- Corpo do Evento -->
+            <div class="event-body">
+                <h3>📋 Sobre o Evento</h3>
+                <p>
+                    Workshop prático de desenvolvimento web focado em tecnologias front-end. 
+                    Os participantes aprenderão a criar sites responsivos e modernos utilizando 
+                    HTML5, CSS3 e JavaScript, com exercícios práticos e projeto final.
+                </p>
+                <p>
+                    Ideal para estudantes, profissionais em transição de carreira e entusiastas 
+                    que desejam iniciar ou aprimorar seus conhecimentos em desenvolvimento web.
+                </p>
+                
+                <h3>🎯 Objetivos</h3>
+                <ul>
+                    <li>Compreender a estrutura semântica de páginas web com HTML5</li>
+                    <li>Criar layouts responsivos e acessíveis utilizando CSS3</li>
+                    <li>Implementar interatividade em páginas web com JavaScript moderno</li>
+                    <li>Desenvolver um projeto prático do zero para o portfólio</li>
+                    <li>Conhecer boas práticas de desenvolvimento e versionamento com Git</li>
+                </ul>
+                
+                <h3>👨‍🏫 Instrutor</h3>
+                <div class="instructor-card">
+                    <div class="instructor-avatar">👨‍💻</div>
+                    <div class="instructor-info">
+                        <h4>Prof. Jonatas Guimarães</h4>
+                        <span class="role">Especialista em Desenvolvimento Web</span>
+                        <p>
+                            Doutor em Ciência da Computação pela UFPA, com mais de 10 anos de 
+                            experiência em desenvolvimento web e ensino de tecnologia. 
+                            Atua como professor efetivo no IFPA Campus Belém.
+                        </p>
+                    </div>
+                </div>
+                
+                <h3>📚 Programação</h3>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">08:00 - 09:00</div>
+                    <div class="schedule-content">
+                        <h4>Credenciamento e Coffee Break</h4>
+                        <p>Recepção dos participantes e entrega de material</p>
+                    </div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">09:00 - 10:30</div>
+                    <div class="schedule-content">
+                        <h4>Fundamentos de HTML5 e Semântica</h4>
+                        <p>Estrutura de documentos, tags semânticas, formulários e acessibilidade</p>
+                    </div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">10:30 - 12:00</div>
+                    <div class="schedule-content">
+                        <h4>CSS3 e Layouts Responsivos</h4>
+                        <p>Flexbox, Grid, media queries e boas práticas de estilização</p>
+                    </div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">12:00 - 13:00</div>
+                    <div class="schedule-content">
+                        <h4>Intervalo para Almoço</h4>
+                        <p>Pausa para alimentação</p>
+                    </div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">13:00 - 15:00</div>
+                    <div class="schedule-content">
+                        <h4>JavaScript Moderno (ES6+)</h4>
+                        <p>Manipulação do DOM, eventos, fetch API e async/await</p>
+                    </div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">15:00 - 16:30</div>
+                    <div class="schedule-content">
+                        <h4>Projeto Prático</h4>
+                        <p>Desenvolvimento guiado de uma aplicação web completa</p>
+                    </div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">16:30 - 17:00</div>
+                    <div class="schedule-content">
+                        <h4>Encerramento e Certificados</h4>
+                        <p>Apresentação dos projetos e entrega de certificados</p>
+                    </div>
+                </div>
+                
+                <h3>📍 Localização</h3>
+                <p>
+                    <strong>Campus Cametá - IFPA</strong><br>
+                    Laboratório de Informática 3 - Bloco C<br>
+                    Rua Euclides Filguereido - Marambaia<br>
+                    Cametá - PA, CEP: 647 00000
+                </p>
+                <p style="margin-top: 10px;">
+                    <a href="https://maps.google.com" target="_blank" style="color: var(--ifpa-blue); text-decoration: none;">
+                        🗺️ Ver no Google Maps →
+                    </a>
+                </p>
+                
+                <h3>ℹ️ Informações Adicionais</h3>
+                <ul>
+                    <li><strong>Pré-requisitos:</strong> Conhecimentos básicos de informática e interesse em desenvolvimento web</li>
+                    <li><strong>Material necessário:</strong> Notebook pessoal com acesso à internet (há computadores disponíveis mediante reserva)</li>
+                    <li><strong>Certificado:</strong> Emitido para participantes com mínimo de 75% de presença</li>
+                    <li><strong>Vagas:</strong> Limitadas a 50 participantes, por ordem de inscrição</li>
+                    <li><strong>Investimento:</strong> Gratuito para comunidade IFPA e público externo</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- SIDEBAR -->
+        <aside class="event-sidebar">
+            
+            <!-- Card de Inscrição -->
+            <div class="sidebar-card">
+                <h3>📝 Inscrição</h3>
+                
+                <div class="info-row">
+                    <span class="label">Status</span>
+                    <span class="value" style="color: var(--ifpa-red); font-weight: bold;">Inscrições Abertas</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Vagas Restantes</span>
+                    <span class="value">15</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Data Limite</span>
+                    <span class="value">14/03/2024</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Público</span>
+                    <span class="value">Aberto</span>
+                </div>
+                
+                <div class="action-buttons">
+                    <a href="../cadastro.html" class="btn btn-success">🎯 Inscrever-se Agora</a>
+                    <a href="../login.html" class="btn btn-outline">🔐 Já tenho conta</a>
+                </div>
+                
+                <p style="font-size: 0.85rem; color: var(--ifpa-gray); margin-top: 15px; text-align: center;">
+                    * É necessário criar uma conta ou fazer login para concluir a inscrição.
+                </p>
+            </div>
+            
+            <!-- Card de Compartilhamento -->
+            <div class="sidebar-card">
+                <h3>🔗 Compartilhar</h3>
+                <div class="share-buttons">
+                    <button class="share-btn" onclick="alert('Link copiado!')">📋 Copiar</button>
+                    <button class="share-btn" onclick="alert('Compartilhar no WhatsApp...')">💬 WhatsApp</button>
+                    <button class="share-btn" onclick="alert('Compartilhar no Facebook...')">📘 Facebook</button>
+                </div>
+            </div>
+            
+            <!-- Card de Contato -->
+            <div class="sidebar-card">
+                <h3>📞 Dúvidas?</h3>
+                <div class="info-row">
+                    <span class="label">E-mail</span>
+                    <span class="value" style="text-align: left; font-size: 0.85rem;">eventos.belem@ifpa.edu.br</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Telefone</span>
+                    <span class="value">(91) 3210-5000</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Atendimento</span>
+                    <span class="value">Seg-Sex, 8h-17h</span>
+                </div>
+                <a href="#" class="btn btn-outline" style="margin-top: 15px;">Fale Conosco</a>
+            </div>
+            
+            <!-- Eventos Relacionados -->
+            <div class="sidebar-card related-events">
+                <h3>🔍 Você pode gostar</h3>
+                
+                <a href="detalhes.html?id=3" class="related-card">
+                    <div class="icon">🔒</div>
+                    <div>
+                        <h4>Curso de Segurança da Informação</h4>
+                        <p>📅 25/03/2024 | 📍 Belém</p>
+                    </div>
+                </a>
+                
+                <a href="detalhes.html?id=5" class="related-card">
+                    <div class="icon">📱</div>
+                    <div>
+                        <h4>Workshop de Apps Mobile</h4>
+                        <p>📅 05/04/2024 | 📍 Marabá</p>
+                    </div>
+                </a>
+                
+                <a href="detalhes.html?id=2" class="related-card">
+                    <div class="icon">🎤</div>
+                    <div>
+                        <h4>Palestra: Carreira em TI</h4>
+                        <p>📅 20/03/2024 | 📍 Castanhal</p>
+                    </div>
+                </a>
+            </div>
+            
+        </aside>
+        
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>🏛️ IFPA</h4>
+                <p>Instituto Federal de Educação, Ciência e Tecnologia do Pará</p>
+                <p>📍 Rua Boaventura da Silva, 955</p>
+                <p>Nazaré, Belém - PA</p>
+                <p>CEP: 66.055-090</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>🔗 Links Úteis</h4>
+                <a href="#">Portal Institucional</a>
+                <a href="#">SUAP - Sistema Acadêmico</a>
+                <a href="#">Biblioteca Virtual</a>
+                <a href="#">Editais e Concursos</a>
+                <a href="#">Transparência</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>📞 Contato</h4>
+                <p>📧 contato@ifpa.edu.br</p>
+                <p>📞 (91) 3210-5000</p>
+                <p>🕐 Seg-Sex: 8h às 17h</p>
+                <a href="#">Fale Conosco</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>📱 Redes Sociais</h4>
+                <a href="#">📘 Facebook</a>
+                <a href="#">📸 Instagram</a>
+                <a href="#">🐦 Twitter/X</a>
+                <a href="#">▶️ YouTube</a>
+                <a href="#">💼 LinkedIn</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 Instituto Federal do Pará - Todos os direitos reservados.</p>
+            <p style="margin-top: 10px; font-size: 0.85rem;">
+                SIGE-IFPA Eventos v1.0 | Desenvolvido por Eloise Daniellen X. Valente
+            </p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Simular carregamento de dados dinâmicos via URL
+        document.addEventListener('DOMContentLoaded', function() {
+            // Pegar ID do evento da URL (simulado)
+            const urlParams = new URLSearchParams(window.location.search);
+            const eventId = urlParams.get('id') || '1';
+            
+            // Dados dos eventos (simulando banco de dados)
+            const eventos = {
+                '1': {
+                    titulo: 'Workshop de Desenvolvimento Web com HTML, CSS e JavaScript',
+                    tipo: 'workshop',
+                    campus: 'Cametá',
+                    data: '15 de março de 2024',
+                    horario: '08:00 - 17:00',
+                    carga: '8 horas',
+                    vagas: '35/50',
+                    vagasRestantes: 15,
+                    investimento: 'Gratuito',
+                    certificado: 'Incluso',
+                    instrutor: 'Prof. Jonatas Guimarães',
+                    instrutorBio: 'Doutor em Ciência da Computação pela UFPA, com mais de 10 anos de experiência em desenvolvimento web e ensino de tecnologia.',
+                    local: 'Laboratório de Informática 3 - Bloco C, Campus Cametá',
+                    inscricoesAbertas: true,
+                    dataLimite: '14/03/2024'
+                }
+                // ... outros eventos
+            };
+            
+            // Atualizar título da página
+            if(eventos[eventId]) {
+                document.title = eventos[eventId].titulo + ' | Eventos IFPA';
+            }
+        });
+        
+        // Funções de compartilhamento
+        function copiarLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('✅ Link copiado para a área de transferência!');
+            });
+        }
+        
+        function compartilharWhatsApp() {
+            const texto = `Confira este evento no IFPA: ${document.title}\n${window.location.href}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(texto)}`, '_blank');
+        }
+        
+        function compartilharFacebook() {
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank');
+        }
+    </script>
+</body>
+</html>

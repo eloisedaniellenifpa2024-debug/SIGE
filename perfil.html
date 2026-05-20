@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Organizador | SIGE-IFPA Eventos</title>
+    <style>
+        :root { --primary: #226b05; --secondary: #032903;--accent: #f4f4f4; --text: #333; --white: #ffffff; --success: #28a745; --info: #007bff; --warning: #ffc107; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--accent); color: var(--text); display: flex; flex-direction: column; min-height: 100vh; }
+        header { background-color: var(--primary); color: var(--white); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 5px solid var(--secondary); }
+        header h1 { font-size: 1.5rem; }
+        nav ul { list-style: none; display: flex; gap: 20px; flex-wrap: wrap; }
+        nav a { color: var(--white); text-decoration: none; font-weight: bold; }
+        nav a:hover { text-decoration: underline; }
+        main { flex: 1; padding: 2rem; max-width: 1200px; margin: 0 auto; width: 100%; }
+        footer { background-color: #333; color: white; text-align: center; padding: 1rem; margin-top: auto; }
+        
+        .page-header { margin-bottom: 30px; }
+        .page-header h2 { color: var(--primary); margin-bottom: 10px; }
+        .page-header p { color: #666; }
+        
+        .profile-grid { display: grid; grid-template-columns: 300px 1fr; gap: 30px; }
+        
+        .sidebar { background: var(--white); padding: 30px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); height: fit-content; }
+        .profile-avatar { width: 120px; height: 120px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: white; margin: 0 auto 20px; }
+        .organizer-badge { background: var(--secondary); color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; display: inline-block; margin-top: 10px; }
+        .sidebar-menu { margin-top: 30px; }
+        .sidebar-menu a { display: block; padding: 12px 15px; color: var(--text); text-decoration: none; border-radius: 4px; margin-bottom: 5px; }
+        .sidebar-menu a:hover { background: #f0f4ff; color: var(--primary); }
+        .sidebar-menu a.active { background: var(--primary); color: white; }
+        .sidebar-menu a .icon { margin-right: 10px; }
+        
+        .content-area { background: var(--white); padding: 40px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .form-section { margin-bottom: 30px; }
+        .form-section h3 { color: var(--primary); margin-bottom: 20px; border-bottom: 2px solid var(--secondary); padding-bottom: 10px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--primary); }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); }
+        .form-group input[readonly] { background-color: #f4f4f4; cursor: not-allowed; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        
+        .btn { display: inline-block; padding: 15px 30px; background-color: var(--primary); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; text-decoration: none; font-size: 1rem; }
+        .btn:hover { background-color: var(--secondary); }
+        .btn-success { background-color: var(--success); }
+        .btn-success:hover { background-color: #218838; }
+        .btn-info { background-color: var(--info); }
+        .btn-info:hover { background-color: #0056b3; }
+        .btn-secondary { background-color: #666; }
+        .btn-secondary:hover { background-color: #444; }
+        .btn-group { display: flex; gap: 15px; margin-top: 30px; }
+        
+        .success-message { background: #d4edda; color: #155724; padding: 20px; border-radius: 8px; margin-top: 20px; text-align: center; display: none; }
+        
+        .quick-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .stat-box { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 20px; border-radius: 8px; text-align: center; }
+        .stat-box .number { font-size: 2rem; font-weight: bold; }
+        .stat-box .label { font-size: 0.85rem; opacity: 0.9; }
+        
+        @media (max-width: 768px) {
+            .profile-grid { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .btn-group { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Botão de Acessibilidade -->
+<script src="../acessibilidade.js"></script>
+<!-- OU, se estiver na raiz: -->
+<script src="acessibilidade.js"></script>
+    <header>
+        <h1>🎯 SIGE-IFPA Eventos</h1>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html">Painel</a></li>
+                <li><a href="meus-eventos.html">Meus Eventos</a></li>
+                <li><a href="rascunhos.html">Rascunhos</a></li>
+                <li><a href="participantes.html">Participantes</a></li>
+                <li><a href="relatorios.html">Relatórios</a></li>
+                <li><a href="../login.html">Sair</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h2>👨‍💼 Perfil do Organizador</h2>
+            <p>Gerencie suas informações e acesse suas ferramentas</p>
+        </div>
+
+        <div class="profile-grid">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="profile-avatar">👨‍💼</div>
+                <h3 style="text-align: center; color: var(--primary);">Carlos Alberto Mendes</h3>
+                <p style="text-align: center; color: #666; font-size: 0.9rem;">carlos.mendes@ifpa.edu.br</p>
+                <div style="text-align: center;">
+                    <span class="organizer-badge">🏆 Organizador Credenciado</span>
+                </div>
+
+                <div class="sidebar-menu">
+                    <a href="perfil.html" class="active"><span class="icon">👤</span>Meu Perfil</a>
+                    <a href="meus-eventos.html"><span class="icon">📅</span>Meus Eventos</a>
+                    <a href="rascunhos.html"><span class="icon">📝</span>Rascunhos</a>
+                    <a href="participantes.html"><span class="icon">👥</span>Participantes</a>
+                    <a href="relatorios.html"><span class="icon">📊</span>Relatórios PDF</a>
+                    <a href="criar-evento.html"><span class="icon">➕</span>Novo Evento</a>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <div class="quick-stats">
+                    <div class="stat-box">
+                        <div class="number">5</div>
+                        <div class="label">Eventos Criados</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number">150</div>
+                        <div class="label">Total Inscritos</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number">95</div>
+                        <div class="label">Certificados</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number">2</div>
+                        <div class="label">Rascunhos</div>
+                    </div>
+                </div>
+
+                <form id="profileForm">
+                    <div class="form-section">
+                        <h3>📋 Informações Pessoais</h3>
+                        
+                        <div class="form-group">
+                            <label for="nome">Nome Completo *</label>
+                            <input type="text" id="nome" value="Carlos Alberto Mendes" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">E-mail Institucional *</label>
+                            <input type="email" id="email" value="carlos.mendes@ifpa.edu.br" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="siape">SIAPE</label>
+                                <input type="text" id="siape" value="1234567" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefone">Telefone</label>
+                                <input type="tel" id="telefone" value="(91) 99999-9999">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>🏢 Informações Institucionais</h3>
+                        
+                        <div class="form-group">
+                            <label for="cargo">Cargo/Função *</label>
+                            <input type="text" id="cargo" value="Diretor Geral do Campus Belém" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="departamento">Departamento/Setor *</label>
+                            <input type="text" id="departamento" value="Direção Geral" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="campus">Campus *</label>
+                                <select id="campus" required>
+                                    <option value="belem" selected>Belém</option>
+                                    <option value="castanhal">Castanhal</option>
+                                    <option value="santarem">Santarém</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="unidade">Unidade Organizadora</label>
+                                <input type="text" id="unidade" value="Coordenação de Eventos">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-success">💾 Salvar Alterações</button>
+                        <a href="dashboard.html" class="btn btn-secondary">Cancelar</a>
+                    </div>
+                </form>
+
+                <div class="success-message" id="successMessage">
+                    <h3>✅ Perfil Atualizado com Sucesso!</h3>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SIGE-IFPA Eventos</p>
+    </footer>
+
+    <script>
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('successMessage').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

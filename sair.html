@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sair | SIGE-IFPA Eventos</title>
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #b30000;
+            --accent: #f4f4f4;
+            --text: #333;
+            --white: #ffffff;
+            --success: #28a745;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--accent);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border-bottom: 5px solid var(--secondary);
+        }
+        
+        header h1 {
+            font-size: 1.5rem;
+        }
+        
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .logout-container {
+            background: var(--white);
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+        
+        .logout-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        
+        .logout-container h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .logout-container p {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .logout-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--success);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        .btn-secondary {
+            background-color: #666;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #444;
+        }
+        
+        .countdown {
+            margin-top: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .countdown span {
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🎯 SIGE-IFPA Eventos</h1>
+    </header>
+
+    <main>
+        <div class="logout-container">
+            <div class="logout-icon">👋</div>
+            <h2>Você saiu do sistema</h2>
+            
+            <div class="logout-message">
+                <strong>✅ Sessão encerrada com sucesso!</strong><br>
+                Seus dados foram protegidos.
+            </div>
+            
+            <p>
+                Obrigado por utilizar o SIGE-IFPA Eventos.<br>
+                Você será redirecionado para a página inicial em instantes.
+            </p>
+            
+            <div class="btn-group">
+                <a href="login.html" class="btn">🔐 Fazer Login Novamente</a>
+                <a href="index.html" class="btn btn-secondary">🏠 Ir para Página Inicial</a>
+            </div>
+            
+            <div class="countdown">
+                Redirecionando em <span id="countdown">5</span> segundos...
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SIGE-IFPA Eventos - Instituto Federal do Pará</p>
+    </footer>
+
+    <script>
+        // Limpar dados da sessão (localStorage)
+        localStorage.removeItem('altoContraste');
+        localStorage.removeItem('usuarioLogado');
+        
+        // Contagem regressiva para redirecionamento
+        let seconds = 5;
+        const countdownElement = document.getElementById('countdown');
+        
+        const countdown = setInterval(function() {
+            seconds--;
+            countdownElement.textContent = seconds;
+            
+            if(seconds <= 0) {
+                clearInterval(countdown);
+                window.location.href = 'index.html';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
